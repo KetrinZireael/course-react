@@ -1,14 +1,24 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import ChartBar from "./ChartBar";
-import './Chart.css'
+import "./Chart.css";
 
 const Chart = (props) => {
-    return (
-        <div className="chart">
-            
-        </div>
-    );
+  const dataPointValues = props.dataPoints.map((dataPoint) => dataPoint.value);
+  const totalMaximum = Math.max(...dataPointValues);
+
+  return (
+    <div className="chart">
+      {props.dataPoints.map((dataPoint) => (
+        <ChartBar
+          key={dataPoint.label}
+          value={dataPoint.value}
+          maxValue={totalMaximum}
+          label={dataPoint.label}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default Chart;
